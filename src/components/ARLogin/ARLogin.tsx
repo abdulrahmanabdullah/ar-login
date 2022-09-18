@@ -3,7 +3,7 @@ import React from 'react'
 interface LoginProps{
 
 }
-const Login = () => {
+const ARLogin = () => {
   return (
     <div>
         <h2>تسجيل الدخول </h2>
@@ -11,4 +11,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default ARLogin;
