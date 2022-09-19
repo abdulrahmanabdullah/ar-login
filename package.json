@@ -1,6 +1,6 @@
 {
   "name": "@abdulrahmanabdullah/ar-login",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Arabic login components",
   "scripts": {
     "rollup": "rollup -c"
@@ -26,5 +26,12 @@
   "types": "dist/index.d.ts",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/abdulrahmanabdullah"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.8",
+    "postcss": "^8.4.16",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }
