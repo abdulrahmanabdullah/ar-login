@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Input } from "./Input";
 import PasswordMeter from "./PasswordMeter";
 
-// interface ARLoginProps {
-
-// }
-const ARLogin = () => {
+ARLogin.propTypes = {
+  onSuccess: PropTypes.func.isRequired,
+};
+const ARLogin = ({ onSuccess }) => {
   //Sign up & login state.
   const [isRegister, setIsRegister] = useState(false);
 
@@ -33,7 +34,10 @@ const ARLogin = () => {
     console.log(data);
   }
   //Send data when press login or sign up button
-  function handleSubmit() {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    onSuccess(formData);
+  }
 
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

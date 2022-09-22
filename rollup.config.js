@@ -1,49 +1,49 @@
-import resolve from "@rollup/plugin-node-resolve";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
+import babel from "@rollup/plugin-babel";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import PeerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
 const packageJson = require("./package.json");
 
-export default [
-  {
-    input: "src/index.js",
-    output: [
-      {
-        file: packageJson.main,
-        format: "cjs",
-        sourcemap: true,
+export default {
+  input: "src/index.js",
+  output: [
+    {
+      file: packageJson.main,
+      format: "cjs",
+      sourcemap: true,
+    },
+    {
+      file: packageJson.module,
+      format: "esm",
+      sourcemap: true,
+    },
+  ],
+  plugins: [
+    PeerDepsExternalPlugin(),
+    postcss({
+      config: {
+        path: "./postcss.config.js",
       },
-      {
-        file: packageJson.module,
-        format: "esm",
-        sourcemap: true,
+      extensions: [".css"],
+      minimize: true,
+      inject: {
+        insertAt: "top",
       },
-    ],
-    plugins: [
-      PeerDepsExternalPlugin(),
-      postcss({
-        config: {
-          path: "./postcss.config.js",
-        },
-        extensions: [".css"],
-        minimize: true,
-        inject: {
-          insertAt: "top",
-        },
-      }),
-      resolve(),
-      commonjs(),
-      // typescript({ tsconfig: "./tsconfig.json" }),
-      terser(),
-    ],
-  },
-  {
-    input: "dist/esm/index.d.ts",
-    output: [{ file: "dist/index.d.js", format: "esm" }],
-    plugins: [dts()],
-  },
-];
+    }),
+    nodeResolve({
+      extensions: [".js", ".jsx"],
+    }),
+    commonjs(),
+    babel({
+      presets: ["@babel/preset-env", "@babel/preset-react"],
+    }),
+    terser(),
+  ],
+};
+// {
+//   input: "dist/esm/index.d.js",
+//   output: [{ file: "dist/index.d.js", format: "esm" }],
+//   // plugins: [dts()],
+// },

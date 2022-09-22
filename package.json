@@ -1,9 +1,10 @@
 {
   "name": "@abdulrahmanabdullah/ar-login",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Arabic login components",
   "scripts": {
     "rollup": "rollup -c",
+    "rollw": "rollup -c -w ",
     "test": "jest"
   },
   "author": "Abdulrahman Alkhudhayri",
@@ -13,6 +14,7 @@
     "@babel/preset-env": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-typescript": "^8.5.0",
@@ -37,13 +39,14 @@
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.js",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/abdulrahmanabdullah"
   },
   "dependencies": {
     "autoprefixer": "^9.8.8",
     "postcss": "^8.4.16",
+    "prop-types": "^15.8.1",
     "react-dom": "^18.2.0",
     "rollup-plugin-postcss": "^4.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"

@@ -1,1 +1,1 @@
-export {default} from "./ARLogin"
+export { default } from "./ARLogin";
