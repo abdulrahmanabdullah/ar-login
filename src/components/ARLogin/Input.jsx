@@ -1,16 +1,16 @@
 import React from "react";
 
-interface InputProps {
-  id: string, name: string, label: string, type: string, autoComplete: string, handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-}
+// interface InputProps {
+//   id: string, name: string, label: string, type: string, autoComplete: string, handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+// }
 export const Input = ({
   id,
   name,
   label,
   type,
   autoComplete,
-  handleChange
-}: InputProps) => {
+  handleChange,
+}) => {
   return (
     <div className="py-2 my-2">
       <label htmlFor={id} className="sr-only">

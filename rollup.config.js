@@ -10,7 +10,7 @@ const packageJson = require("./package.json");
 
 export default [
   {
-    input: "src/index.ts",
+    input: "src/index.js",
     output: [
       {
         file: packageJson.main,
@@ -37,13 +37,13 @@ export default [
       }),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      // typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
     ],
   },
   {
     input: "dist/esm/index.d.ts",
-    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    output: [{ file: "dist/index.d.js", format: "esm" }],
     plugins: [dts()],
   },
 ];

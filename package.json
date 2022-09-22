@@ -1,6 +1,6 @@
 {
   "name": "@abdulrahmanabdullah/ar-login",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Arabic login components",
   "scripts": {
     "rollup": "rollup -c",

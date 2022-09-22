@@ -1,31 +1,39 @@
-import React, { useState } from 'react'
-import { Input } from './Input'
+import React, { useState } from "react";
+import { Input } from "./Input";
+import PasswordMeter from "./PasswordMeter";
 
-interface ARLoginProps {
+// interface ARLoginProps {
 
-}
+// }
 const ARLogin = () => {
   //Sign up & login state.
   const [isRegister, setIsRegister] = useState(false);
 
-  //Form data state 
+  //Form data state
   const [formData, setFormData] = useState({
-    firstName: "", lastName: "", email: "", password: ""
-  })
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
   //Switch form between login and sign up.
   function switchForm() {
-    setIsRegister((prevState) => !prevState)
+    setIsRegister((prevState) => !prevState);
   }
 
-  //Input event to update component state. 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFormData({ ...formData, [event.currentTarget.name]: event.currentTarget.value })
+  //Input event to update component state.
+  function handleChange(event) {
+    setFormData({
+      ...formData,
+      [event.currentTarget.name]: event.target.value,
+    });
   }
 
+  function passToLoginCallBack(data) {
+    console.log(data);
+  }
   //Send data when press login or sign up button
-  function handleSubmit() {
-
-  }
+  function handleSubmit() {}
 
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -51,12 +59,35 @@ const ARLogin = () => {
             {/* First name  and last name field*/}
             {isRegister && (
               <>
-                <Input name='firstName' id='first-name' type='text' handleChange={handleChange} label='first name' autoComplete='firstName' />
-                <Input name='lastName' id='last-name' type='text' handleChange={handleChange} label='last name' autoComplete='lastName' />
+                <Input
+                  name="firstName"
+                  id="first-name"
+                  type="text"
+                  handleChange={handleChange}
+                  label="first name"
+                  autoComplete="firstName"
+                />
+                <Input
+                  name="lastName"
+                  id="last-name"
+                  type="text"
+                  handleChange={handleChange}
+                  label="last name"
+                  autoComplete="lastName"
+                />
               </>
             )}
             {/* Email */}
-            <Input name='email' id='email' type='email' handleChange={handleChange} label='email' autoComplete='email' />
+            <Input
+              name="email"
+              id="email"
+              type="email"
+              handleChange={handleChange}
+              label="email"
+              autoComplete="email"
+            />
+            {/* Password */}
+            <PasswordMeter passToLoginCallBack={passToLoginCallBack} />
           </div>
           {/* When sign in forms up */}
           {!isRegister && (
@@ -113,9 +144,21 @@ const ARLogin = () => {
             </button>
           </div>
         </form>
+        {/* Divider */}
+        <div className="relative py-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-b border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center">
+            <span className="bg-white text-sm px-5 text-gray-500">
+              OR continue with
+            </span>
+          </div>
+        </div>
+        {/* End Divider */}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ARLogin;
