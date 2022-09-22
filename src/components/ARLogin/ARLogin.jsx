@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Input } from "./Input";
 import PasswordMeter from "./PasswordMeter";
+import arJson from "./ar.json" assert { type: "json" };
 
-ARLogin.propTypes = {
-  onSuccess: PropTypes.func.isRequired,
-};
 const ARLogin = ({ onSuccess }) => {
   //Sign up & login state.
   const [isRegister, setIsRegister] = useState(false);
@@ -30,21 +28,29 @@ const ARLogin = ({ onSuccess }) => {
     });
   }
 
-  function passToLoginCallBack(data) {
-    console.log(data);
+  function passToLoginCallBack(passValue) {
+    setFormData({ ...formData, password: passValue });
   }
   //Send data when press login or sign up button
   function handleSubmit(event) {
     event.preventDefault();
-    onSuccess(formData);
+    //Remove empty value and return object with real data.
+    const data = Object.entries(formData).reduce(
+      (a, [key, value]) => (value ? ((a[key] = value), a) : a),
+      {}
+    );
+    onSuccess(data);
   }
 
   return (
-    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+    <div
+      dir="rtl"
+      className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
+      <div dir="rtl" className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            {isRegister ? "Sign up new user" : "Sign in to your account"}
+            {isRegister ? arJson.signup : "Sign in to your account"}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             {isRegister ? "Already have account?" : "Don't have account?"}
@@ -163,6 +169,10 @@ const ARLogin = ({ onSuccess }) => {
       </div>
     </div>
   );
+};
+
+ARLogin.propTypes = {
+  onSuccess: PropTypes.func.isRequired,
 };
 
 export default ARLogin;
