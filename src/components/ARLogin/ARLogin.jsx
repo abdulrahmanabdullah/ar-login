@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Input } from "./Input";
 import PasswordMeter from "./PasswordMeter";
-import arJson from "./ar.json" assert { type: "json" };
+import arJson from "./ar.json";
 
 const ARLogin = ({ onSuccess }) => {
   //Sign up & login state.
@@ -50,15 +50,15 @@ const ARLogin = ({ onSuccess }) => {
       <div dir="rtl" className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            {isRegister ? arJson.signup : "Sign in to your account"}
+            {isRegister ? arJson.signUp : arJson.signIn}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            {isRegister ? "Already have account?" : "Don't have account?"}
+            {isRegister ? arJson.already : arJson.newAccount}
             <button
               className="font-medium text-indigo-600 background-transparent"
               onClick={switchForm}
             >
-              &nbsp;{isRegister ? " Sign In here" : "Sign Up here"}
+              &nbsp;{isRegister ? arJson.signHere : arJson.signUpHere}
             </button>
           </p>
         </div>
@@ -74,7 +74,7 @@ const ARLogin = ({ onSuccess }) => {
                   id="first-name"
                   type="text"
                   handleChange={handleChange}
-                  label="first name"
+                  label={arJson.firstNameL}
                   autoComplete="firstName"
                 />
                 <Input
@@ -82,7 +82,7 @@ const ARLogin = ({ onSuccess }) => {
                   id="last-name"
                   type="text"
                   handleChange={handleChange}
-                  label="last name"
+                  label={arJson.lastNameL}
                   autoComplete="lastName"
                 />
               </>
@@ -93,7 +93,7 @@ const ARLogin = ({ onSuccess }) => {
               id="email"
               type="email"
               handleChange={handleChange}
-              label="email"
+              label={arJson.email}
               autoComplete="email"
             />
             {/* Password */}
@@ -114,7 +114,7 @@ const ARLogin = ({ onSuccess }) => {
                     htmlFor="remember-me"
                     className="ml-2 block text-sm text-gray-900"
                   >
-                    Remember me
+                    {arJson.remember}
                   </label>
                 </div>
 
@@ -123,7 +123,7 @@ const ARLogin = ({ onSuccess }) => {
                     className="font-medium text-indigo-600 background-transparent"
                     onClick={() => console.log("forget pass")}
                   >
-                    Forgot your password?
+                    {arJson.forgetPass}
                   </button>
                 </div>
               </div>
@@ -150,7 +150,7 @@ const ARLogin = ({ onSuccess }) => {
                   />
                 </svg>
               </span>
-              Sign in
+              {isRegister ? arJson.signUpBtn : arJson.signInBtn}
             </button>
           </div>
         </form>
@@ -161,7 +161,7 @@ const ARLogin = ({ onSuccess }) => {
           </div>
           <div className="relative flex justify-center">
             <span className="bg-white text-sm px-5 text-gray-500">
-              OR continue with
+              {arJson.continue}
             </span>
           </div>
         </div>
