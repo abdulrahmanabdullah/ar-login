@@ -35,6 +35,8 @@ export default {
     }),
     json(),
     nodeResolve({
+      // to resolve http request
+      browser: true,
       extensions: [".js", ".jsx"],
     }),
     commonjs(),

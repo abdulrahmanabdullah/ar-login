@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Input } from "./Input";
 import PasswordMeter from "./PasswordMeter";
 import arJson from "./ar.json";
 
-const ARLogin = ({ onSuccess, isClicked }) => {
+const ARLogin = ({ onSuccess, url }) => {
+  // const navigate = useNavigate();
   //Sign up & login state.
   const [isRegister, setIsRegister] = useState(false);
 
@@ -28,6 +31,7 @@ const ARLogin = ({ onSuccess, isClicked }) => {
     });
   }
 
+  //Save password on local state.
   function passToLoginCallBack(passValue) {
     setFormData({ ...formData, password: passValue });
   }
@@ -35,11 +39,20 @@ const ARLogin = ({ onSuccess, isClicked }) => {
   function handleSubmit(event) {
     event.preventDefault();
     //Remove empty value and return object with real data.
-    const data = Object.entries(formData).reduce(
+    const payload = Object.entries(formData).reduce(
       (a, [key, value]) => (value ? ((a[key] = value), a) : a),
       {}
     );
-    onSuccess(data);
+    axios
+      .post(url, payload)
+      .then((res) => {
+        const { data } = res;
+        console.info(data.message);
+        onSuccess(data.user);
+        // navigate("/");
+        window.history.go(-1);
+      })
+      .catch((err) => console.log(err));
   }
 
   // return (
@@ -326,7 +339,7 @@ const ARLogin = ({ onSuccess, isClicked }) => {
 
 ARLogin.propTypes = {
   onSuccess: PropTypes.func.isRequired,
-  isClicked: PropTypes.bool.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default ARLogin;
